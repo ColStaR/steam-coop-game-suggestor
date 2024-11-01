@@ -58,14 +58,25 @@ def get_shared_games(api_key, list_of_steamid):
         shared_games_set = shared_games_set.intersection(game_set)
 
     return list(shared_games_set)
-    
+
+def get_game_info_json(api_key, app_id):
+    url = f"http://store.steampowered.com/api/appdetails?appids={app_id}"
+    print(url)
+    response = requests.get(url)
+    print(response)
+    data = response.json()
+    return data
+
+def get_game_info_categories(app_id, input_game_data):
+    print(input_game_data)
+    raw_categories = input_game_data[app_id]["data"]["categories"]
+    return get_game_genre
+
 
 api_key = get_api_key_from_file()
 steam_id = get_steam_id_from_file()
 
 example_steamid = 76561198322674805
 
-print(get_shared_games(api_key, [steam_id, example_steamid]))
-
-
-
+# print(get_shared_games(api_key, [steam_id, example_steamid]))
+print(get_game_info_categories(("620"), get_game_info_json(api_key, "620")))
